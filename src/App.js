@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Disease from "./tableData/disease";
+import Symptoms from "./tableData/symptoms";
+import Mappedtable from "./tableData/mappedtable";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Disease Prediction</h1>
+     
+      
+
+
+      <div className="container border border-warning ">
+        <div className="row">
+          <div className="col-4 flex-col"> <Disease /></div>
+          <div className="col-4 flex-col"> <Mappedtable /></div>
+          <div className="col-4 flex-col"><Symptoms /></div>
+        </div>
+      </div>
     </div>
   );
 }
