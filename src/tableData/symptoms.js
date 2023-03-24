@@ -4,13 +4,13 @@ function Symptoms() {
     const [Symptoms, setData] = useState([]);
     useEffect(() => {
       (async () => {
-       let result= await axios.get('http://localhost:5000/symptomApp/get-symptoms')
+       let result= await axios.get(`${URL}/symptomApp/get-symptoms`)
        setData(result.data)
       }
       )()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
-    
+  
     
     // empty dependency array to run effect only once on mount
 

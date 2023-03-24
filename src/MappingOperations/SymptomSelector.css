@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  label {
+    margin: 0.5rem;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: fit-content;
+  }
+  
+  button[type="submit"] {
+    margin-top: 1rem;
+  }
+  
+  @media (max-width: 576px) {
+    form {
+      flex-direction: column;
+    }
+  }
+  

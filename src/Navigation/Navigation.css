@@ -1,0 +1,29 @@
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 2rem;
+  }
+  
+  .nav-link {
+    font-size: 1.2rem;
+    margin-right: 1.5rem;
+  }
+  
+  .nav-link:hover {
+    color: #007bff;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-toggler-icon {
+      background-color: #007bff;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .navbar-nav {
+      margin-left: auto;
+    }
+  }
+  
+
+  

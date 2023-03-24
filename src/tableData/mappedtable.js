@@ -7,7 +7,7 @@ function Mappedtable() {
     const [mappedData, setData] = useState([]);
     useEffect(() => {
       (async () => {
-       let result= await axios.get('http://localhost:5000/symptomApp/get-mapped-table')
+       let result= await axios.get(`${URL}/mappedtable/get-mapped-table`)
        setData(result.data)
       }
       )()
