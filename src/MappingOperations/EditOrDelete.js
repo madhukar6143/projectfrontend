@@ -4,6 +4,9 @@ import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import "./InsertDisease.css";
 import { URL } from "../App";
+const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 function EditOrDelete() {
   const { addToast } = useToasts();
@@ -22,10 +25,16 @@ function EditOrDelete() {
   }, []);
   
   const getMappedData = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
      let result= await axios.get(`${URL}/mappedtable/get-mapped-table`)
      setMappedData(result.data)
   }
   const getSymptoms = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let result = await axios.get(`${URL}/symptomApp/get-symptoms`);
     setData(result.data);
   };
@@ -52,6 +61,7 @@ function EditOrDelete() {
 )}
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
+      <div className="col-sm-6 col-md-4"></div>
         {symptoms.map((symptom) => (
           <div className="col-sm-6 col-md-4" key={symptom.symptom_id}>
             <label className="d-flex align-items-center">

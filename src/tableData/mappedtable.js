@@ -7,6 +7,9 @@ function Mappedtable() {
     const [mappedData, setData] = useState([]);
     useEffect(() => {
       (async () => {
+        const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
        let result= await axios.get(`${URL}/mappedtable/get-mapped-table`)
        setData(result.data)
       }

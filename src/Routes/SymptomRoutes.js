@@ -1,15 +1,27 @@
-import React from 'react'
-import CreateSymptom from '../SymptomOperations/CreateSymptom'
-import EditOrDeleteSymptom from '../SymptomOperations/EditOrDeleteSymptom'
+import { Link,Outlet } from 'react-router-dom';
 
 function SymptomRoutes() {
     return (
-<div className='row'>
-<div className='col-12 col-md-6'><CreateSymptom/></div>
+        <>
+<nav className="navbar navbar-expand-lg navbar-dark ">
+  <div className="container-fluid">
+    <ul className="navbar-nav nav-center">
+      <li className="nav-item">
+        <Link to="create" className="nav-link">
+          <button>Create Symptom</button>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="edit" className="nav-link">
+          <button>Update</button>
+        </Link>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<div className='col-0 col-md-6 mt-3'><EditOrDeleteSymptom/></div>
-
-</div>
+        <Outlet/>
+      </>
     )
 }
 

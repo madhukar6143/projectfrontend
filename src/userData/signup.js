@@ -16,6 +16,7 @@ const Signup = () => {
 
   const onSubmit = async(data) => {
     try{
+      console.log(data)
       let response= await axios.post(`${URL}/user/signup`,data)
       addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  });
       reset();
@@ -76,12 +77,16 @@ const Signup = () => {
           )}
           <input
             {...register("password", {
-              required: true,
+              required: true,  minLength: 
+              {
+                value: 8,
+                message: 'minimum length should be 8' // JS only: <p>error message</p> TS only support string
+              },
               pattern: {
                 value:
                   /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/,
                 message:
-                  "Password must contain at least one uppercase letter, one lowercase letter, one special character, and have a minimum length of 8 and maximum length of 16 characters",
+                  "Password must contain at least one uppercase letter, one lowercase letter, one special character",
               },
             })}
             type="password"
@@ -92,6 +97,8 @@ const Signup = () => {
           {errors.password && (
             <span className="error">{errors.password.message}</span>
           )}
+
+          
           <button type="submit">Sign Up</button>
         </form>
       </div>

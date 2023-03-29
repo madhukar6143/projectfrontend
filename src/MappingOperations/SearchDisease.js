@@ -3,10 +3,15 @@ import { useForm } from 'react-hook-form';
 import axios from "axios";
 import { useToasts } from 'react-toast-notifications';
 import { URL } from "../App";
+import handleErrors from '../errorComponent'
 
 import './SymptomSelector.css'; // import the CSS file
 
+
 const SymptomSelector = () => {
+  
+  const { addToast } = useToasts();
+  const { register, reset,handleSubmit } = useForm();
     
 const [symptoms, setData] = useState([]);
  
@@ -15,25 +20,28 @@ useEffect(() => {
 }, []);
 
   const getSymptoms = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let result = await axios.get(`${URL}/symptomApp/get-symptoms`);
     
     setData(result.data);
   };
-  const { addToast } = useToasts();
-  const { register, reset,handleSubmit } = useForm();
   
   const onSubmit = async(data) => {
  
     const selectedSymptoms = Object.keys(data.symptoms)
       .filter((key) => data.symptoms[key])
       .map((key) => parseInt(key.replace('symptoms.', '')));
-
+      const token = localStorage.getItem('jwt');
+      // Set the default headers for all requests
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       axios.post(`${URL}/search/search-disease`, selectedSymptoms)
       .then((response) => {
         addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  })
       })
       .catch((error) => {
-        addToast(error.message, { appearance: 'error',autoDismissTimeout: 1000  })
+        handleErrors(error, addToast);
       });
       reset()
   };

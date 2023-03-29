@@ -24,12 +24,18 @@ function InsertDisease() {
   }, []);
 
   const getSymptoms = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let result = await axios.get(
       `${URL}/symptomApp/get-symptoms`
     );
     setData(result.data);
   };
   const FilterDisease = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let result = await axios.get(
       `${URL}/mappedtable/remaining-disease`
     );
@@ -48,7 +54,9 @@ function InsertDisease() {
         disease_id: selectedDisease,
         symptom: selectedSymptoms,
       };
-    
+      const token = localStorage.getItem('jwt');
+      // Set the default headers for all requests
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios
       .post(`${URL}/mappedtable/create-disease`, input)
       .then((response) => {

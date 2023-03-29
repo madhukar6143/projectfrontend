@@ -13,11 +13,13 @@ function RequiredAuth({role,children}) {
       } 
       else
       {
+        // return children;
         return <Navigate to="/login" />;
       }
     }
     else {
-        return <Navigate to="/login" />;
+       return <Navigate to="/login" />;
+        // return children;
       }
    
 }

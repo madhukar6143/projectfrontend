@@ -6,6 +6,7 @@ import { useToasts } from 'react-toast-notifications';
 import { URL } from "../App";
 import handleErrors from '../errorComponent'
 
+
 function EditOrDeleteSymptom() 
 {
   const { addToast } = useToasts();
@@ -21,12 +22,18 @@ useEffect(() => {
 }, []);
 
   const getSymptoms = async () => {
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let result = await axios.get(`${URL}/symptomApp/get-symptoms`);
     setData(result.data);
   };
 
   const deleteSymptom = async (id) => {
     try{
+      const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     let response= await axios.delete(`${URL}/symptomApp/delete-symptom-master/${id}`)
     addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  });
      getSymptoms()

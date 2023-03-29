@@ -5,9 +5,8 @@ import "./disease.css";
 import { useToasts } from 'react-toast-notifications';
 import { URL } from "../App";
 import handleErrors from '../errorComponent'
-const token = localStorage.getItem('jwt');
-// Set the default headers for all requests
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import { confirmAlert } from 'react-confirm-alert';  
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 function EditOrDeleteDisease() 
 {
@@ -25,12 +24,46 @@ useEffect(() => {
 }, []);
 
   const getDiseases = async () => {
-    let result = await axios.get(`${URL}/diseaseApp/get-disease-master`);
-    setData(result.data);
+    try{
+      const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      let result = await axios.get(`${URL}/diseaseApp/get-disease-master`);
+      setData(result.data);
+      }
+      catch(error)
+      {
+        handleErrors(error, addToast);
+      }
   };
+
+  const handleDelete = (id) => {
+    confirmAlert({
+      title: 'Confirm deletion',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            deleteDisease(id)
+            // Handle delete logic here
+          },
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  }; 
 
   const deleteDisease = async (id) => {
     try{
+      const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
     let response= await axios.delete(`${URL}/diseaseApp/delete-disease-master/${id}`)
     addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  });
      getDiseases()
@@ -56,6 +89,10 @@ const cancelAction =() =>
 
 const saveUserById = async (modifiedUser) => {
   try{
+    const token = localStorage.getItem('jwt');
+// Set the default headers for all requests
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
   let response=  await axios.put(`${URL}/diseaseApp/update-disease-master`, modifiedUser)
     setEditDisease({ ...editedDiseaseName, status: false })
     addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  });
@@ -127,7 +164,7 @@ const saveUserById = async (modifiedUser) => {
                                             :
                                             <>
                                                 <button type="button" className="btn btn-warning m-1" onClick={() => editDisease(Disease)}>Edit</button>
-                                                <button type="button" className="btn btn-danger m-1" onClick={() => deleteDisease(Disease.disease_id)}>x</button>
+                                                <button type="button" className="btn btn-danger m-1" onClick={() => handleDelete(Disease.disease_id)}>x</button>
                                             </>
                                         }
 

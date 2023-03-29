@@ -7,6 +7,7 @@ import { useToasts } from 'react-toast-notifications';
 import handleErrors from '../errorComponent'
 import { useAuth } from "../Auth/auth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const Login = () => {
@@ -14,12 +15,11 @@ const Login = () => {
   const auth =useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate =useNavigate();
-
   
   const location = useLocation();
   const { email, password } = location.state || {};
 
-
+  
   const onSubmit = async(data) => {
     try{
       let response= await axios.post(`${URL}/user/login`,data)
