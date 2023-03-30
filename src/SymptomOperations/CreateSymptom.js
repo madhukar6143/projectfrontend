@@ -5,9 +5,6 @@ import { URL } from "../App";
 import handleErrors from '../errorComponent'
 import { useToasts } from 'react-toast-notifications';
 
-
-
-
 function CreateSymptom() {
   const { addToast } = useToasts();
   
@@ -18,24 +15,26 @@ function CreateSymptom() {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    data.symptom=data.symptom.trim()
-    if(data.symptom==="")
+    console.log(data)
+    data.symptomName=data.symptomName.trim()
+    if(data.symptomName==="")
     return addToast("symptom name can't be null", { appearance: 'error',autoDismissTimeout: 1000  });
-    data.symptom =data.symptom.charAt(0).toUpperCase() + data.symptom.slice(1);
-    console.log(data.symptom)
+    data.symptomName =data.symptomName.charAt(0).toUpperCase() + data.symptomName.slice(1);
     const token = localStorage.getItem('jwt');
     // Set the default headers for all requests
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    
+    console.log(data)
     axios
       .post(`${URL}/symptomApp/create-symptom-master`, data)
       .then((response) => {
+        console.log(response)
         addToast(response.data.message, { appearance: 'success',autoDismissTimeout: 1000  })
+        
+      reset()
       })
       .catch((error) => {
         handleErrors(error, addToast);
       });
-      reset()
   };return (
     <div className="mt-5">
 
@@ -45,7 +44,7 @@ function CreateSymptom() {
         <input
           type="text"
           className="form-control"
-          {...register("symptom", { required: true })}
+          {...register("symptomName", { required: true })}
         />
          {errors.symptom && <p className="text-danger">This field is required</p>}
         

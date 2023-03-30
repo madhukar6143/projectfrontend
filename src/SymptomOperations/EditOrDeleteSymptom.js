@@ -69,7 +69,6 @@ const saveUserById = async (modifiedUser) => {
   }
 }
 
-  // empty dependency array to run effect only once on mount
 
 
   return (
@@ -83,7 +82,7 @@ const saveUserById = async (modifiedUser) => {
                     <table className="table bg-light">
                         <thead>
                             <tr>
-                                <th>Symptom ID</th>
+                            <th>Serial Number</th>
                                 <th>Symptom Name</th>
                                 <th> Actions</th>
                             </tr>
@@ -91,9 +90,9 @@ const saveUserById = async (modifiedUser) => {
 
                         <tbody>
                             {
-                                Symptoms.map((Symptom) => <tr key={Symptom.symptom_id}>
+                                Symptoms.map((Symptom,index) => <tr key={Symptom.symptom_id}>
                                   
-                                  <td>{Symptom.symptom_id}</td>
+                                  <td>{index+1}</td>
                                     <td>
                                         {editedSymptomName.status === true && editedSymptomName.id === Symptom.symptom_id ?
                                         <>

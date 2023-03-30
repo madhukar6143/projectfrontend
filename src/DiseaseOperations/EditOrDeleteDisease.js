@@ -121,7 +121,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     <table className="table bg-light">
                         <thead>
                             <tr>
-                                <th>Disease ID</th>
+                            <th>Serial Number</th>
                                 <th>Disease Name</th>
                                 <th> Actions</th>
                             </tr>
@@ -129,9 +129,9 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
                         <tbody>
                             {
-                                Diseases.map((Disease) => <tr key={Disease.disease_id}>
+                                Diseases.map((Disease,index) => <tr key={Disease.disease_id}>
                                   
-                                  <td>{Disease.disease_id}</td>
+                                  <td>{index + 1}</td>
                                     <td>
                                         {editedDiseaseName.status === true && editedDiseaseName.id === Disease.disease_id ?
                                         <>

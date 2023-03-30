@@ -60,7 +60,6 @@ function CreateDisease() {
           disease_name: diseaseName,
           symptom: selectedSymptoms,
         };
-        console.log(input)
         const result = await axios.post(
           `${URL}/mappedtable/create-disease`,
           input
