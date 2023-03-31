@@ -8,14 +8,6 @@ function Home() {
     const auth =useAuth();
 
 
-
-
-    
-  useEffect(() => {
-    // Call handleLogout when the component mounts
-    auth.login("admin","user")
-  }, []); 
-  
     return (
 <div>
 <div className="home">

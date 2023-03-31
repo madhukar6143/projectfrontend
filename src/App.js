@@ -17,6 +17,7 @@ import EditOrDeleteDisease from './DiseaseOperations/EditOrDeleteDisease';
 import CreateSymptom from './SymptomOperations/CreateSymptom';
 import EditOrDeleteSymptom from './SymptomOperations/EditOrDeleteSymptom';
 import EditingPage from './MappingOperations/EditingPage';
+import Combined from './DiseaseOperations/Combined';
 
 export const URL = "http://localhost:5000"
 //export const URL = "http://localhost:3031"
@@ -36,7 +37,7 @@ function App() {
     <Route path="disease" element={<RequiredAuth role="admin" ><DiseaseRoutes/></RequiredAuth>}>
       <Route index element={<CreateDisease/>}/>
       <Route  path='create' element={<CreateDisease/>}  />
-      <Route path='edit' element={<EditOrDeleteDisease/>}></Route>
+      <Route path='edit' element={<Combined/>}></Route>
     </Route>
     <Route path='/mapped'  element={<RequiredAuth role="admin" ><MappedRoutes/></RequiredAuth>}/>
     <Route path='/edit'  element={<RequiredAuth role="admin" ><EditingPage/></RequiredAuth>}/>

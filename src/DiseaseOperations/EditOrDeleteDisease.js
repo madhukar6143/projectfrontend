@@ -123,6 +123,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                             <tr>
                             <th>Serial Number</th>
                                 <th>Disease Name</th>
+                                <th>Symptoms</th>
                                 <th> Actions</th>
                             </tr>
                         </thead>

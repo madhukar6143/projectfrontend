@@ -14,6 +14,7 @@ function EditingPage() {
 
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [symptoms, setData] = useState([]);
+  const [diseaseName, setDiseaseName] = useState(disease.diseaseName);
 
   useEffect(() => {
     getSymptoms();
@@ -70,7 +71,27 @@ function EditingPage() {
     }
   };
 
+  const handleDiseaseNameChange = (e) => {
+    setDiseaseName(e.target.value);
+  }
+
+
   return (
+    <div >
+      <div><button className="bg-danger float-end  ">X</button></div>
+  <div className="row">
+    <div className="col-6">
+    <form onSubmit={handleSubmit}>
+      <h2>Edit {disease.diseaseName}</h2>
+      <div>
+        <label htmlFor="diseaseName">Disease Name:</label>
+        <input type="text" id="diseaseName" name="diseaseName" value={diseaseName} onChange={handleDiseaseNameChange} />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    </div>
+    <div className="col-6">
     <form onSubmit={handleSubmit}>
       <h2>Edit symptoms for {disease.diseaseName}</h2>
       <div className="row">
@@ -99,6 +120,9 @@ function EditingPage() {
 
       <button type="submit">Submit</button>
     </form>
+    </div>
+  </div>
+  </div>
   );
 }
 

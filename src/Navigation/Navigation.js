@@ -26,12 +26,7 @@ const Navigation = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link to="/home " className={`nav-link ${active === 'home' ? 'active' : ''}`}>
-              <button onClick={() => setActive('home')}>Home</button>
-               
-              </Link>
-            </li>
+            
             {auth.role==="admin" &&
             <li className="nav-item">
               <Link to="/disease" className={`nav-link ${active === 'disease' ? 'active' : ''}`}>
